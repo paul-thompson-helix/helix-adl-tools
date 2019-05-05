@@ -58,7 +58,7 @@ postgresDbProfile = DbProfile {
     P_Float -> "real"
     P_Double -> "double precision"
     P_Bool -> "boolean"
-    _ -> "json"
+    _ -> "jsonb"
 }
 
 mssqlDbProfile = DbProfile {
@@ -241,7 +241,7 @@ rawColumnFromField dbp field = mkColumn M.empty False (f_type field)
     mkColumn _ nullable te@(TypeExpr (RT_Primitive p) _) =
       mkRawColumn nullable (mkColumnType p) te
 
-    -- For any other types, just store as json
+    -- For any other types, just store as jsonb
     mkColumn _ nullable te =
       mkRawColumn nullable (mkColumnType P_Json) te
 
